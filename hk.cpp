@@ -12,18 +12,15 @@ bool bfs()
 {
 	queue < int > fila;
 
-	//cout << "bfs:\n";
 	for(int i = 1 ; i <= m ; i++)
 	{
 		if(!pairs[i])
 		{
-			//cout << i << ' ';
 			fila.push(i);
 			dist[i] = 0;
 		}
 		else dist[i] = inf;
 	}
-	//cout << "\n";
 
 	dist[0] = inf;
 
@@ -31,12 +28,11 @@ bool bfs()
 	{
 		int u = fila.front();
 		fila.pop();
-		//cout << "U: " << u << endl;
+		
 		if(dist[u] < dist[0])
 		{
 			for(int v : grafo[u])
 			{
-				//cout << "V: " << v << ' ' << pairs[v] << ' ' << dist[pairs[v]] << endl;
 				if(dist[pairs[v]] == inf)
 				{
 					dist[pairs[v]] = dist[u]+1;
@@ -57,7 +53,6 @@ bool dfs(int u)
 		{
 			if(dist[pairs[v]] == dist[u]+1 and dfs(pairs[v]))
 			{
-				//cout << "ligados: " << u << ' ' << v << endl;
 				pairs[u] = v;
 				pairs[v] = u;
 				return true;
@@ -78,7 +73,6 @@ int hk()
 
 	while(bfs())
 	{
-		//cout << "entrei\n";
 		for(int i = 1 ; i <= m ; i++)
 		{
 			if(!pairs[i] and dfs(i)) resp++;
@@ -117,15 +111,9 @@ int main()
 				{
 					grafo[i].pb(j);	
 					grafo[j].pb(i);
-			//		cout << i << ' ' << j << "\n";
 				}
 			}
 		}
-
-//		grafo[3].pb(51);
-//		grafo[51].pb(3);
-//		grafo[1].pb(52);
-//		grafo[52].pb(1);
 
 		int r = hk();
 
